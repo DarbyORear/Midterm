@@ -102,23 +102,67 @@ public class RentalApp {
 
 
 
-private static void searchByAvailability() {
+private static void searchByAvailableDates() {
 		// TODO Auto-generated method stub
-		
-	}
+
+
+
+	
+	
+	
+}
+	
 
 
 
 
-
-
-public static void searchByLocation() {
+public static void searchByLocation(Scanner scnr, ArrayList<Property> allLocations){
 //	Midtown
 //	Downtown
 //	West Village
 //	"Corktown"
 //		
+	
+	int propertyChoice = Validator.getInt(scnr, "Tell me where you'd like to go?", 1, 4);
+	
+	String  propertyLocation;
+	int count = 1;
+	int propertyPick;
+
+	switch(propertyChoice) {
+	case 1:
+		propertyLocation = "Midtown";
+		break;
+	case 2: 
+		propertyLocation = "Downtown";
+		break;
+	case 3: 
+		propertyLocation = "West Village";
+		break;
+	case 4:
+		propertyLocation = "Corktown";
+		break;
+	default:
+		propertyLocation = null;
+}
+	for (Property property : allLocations) {
+		if (property.getType().equals(propertyLocation)) {
+			System.out.println(count + ". " + property.getName());
+			count++;
+		}
 	}
+	
+	propertyPick = Validator.getInt(scnr, "Which property at " + propertyLocation + " would you like to view?", 1, count - 1);
+	
+	//viewFullDetails();
+	
+
+
+
+
+
+
+}
 
 
 
