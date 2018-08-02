@@ -2,6 +2,7 @@ package co.grandcircus.midterm;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RentalApp {
@@ -48,9 +49,52 @@ public class RentalApp {
 
 
 
-public static void searchByPropertyType() {
-		// TODO Auto-generated method stub
+	public static void searchByPropertyType(Scanner scnr, ArrayList<Property> allRentals) {
+		viewPropertyMenu();
+		int propertyChoice = Validator.getInt(scnr, "What type of rental are you looking for?", 1, 4);
 		
+		String  propertyType;
+		int count = 1;
+		int propertyPick;
+	
+		switch(propertyChoice) {
+		case 1:
+			propertyType = "Loft";
+			break;
+		case 2: 
+			propertyType = "Condo";
+			break;
+		case 3: 
+			propertyType = "Single Family";
+			break;
+		case 4:
+			propertyType = "Cottage";
+			break;
+		default:
+			propertyType = null;
+	}
+		for (Property property : allRentals) {
+			if (property.getType().equals(propertyType)) {
+				System.out.println(count + ". " + property.getName());
+				count++;
+			}
+		}
+		
+		propertyPick = Validator.getInt(scnr, "Which " + propertyType + " would you like to view?", 1, count - 1);
+		
+		//viewFullDetails();
+		
+		
+		
+		
+	}
+
+	public static void viewPropertyMenu() {
+		System.out.println("Great! Let's explore the variety of properties we offer: ");
+		System.out.println("1. Luxurious Lofts");
+		System.out.println("2. Chic Condo");
+		System.out.println("3. Modern Single Family");
+		System.out.println("4. Cozy Cottage");
 	}
 
 
@@ -69,8 +113,11 @@ private static void searchByAvailability() {
 
 
 public static void searchByLocation() {
-		// TODO Auto-generated method stub
-		
+//	Midtown
+//	Downtown
+//	West Village
+//	"Corktown"
+//		
 	}
 
 
