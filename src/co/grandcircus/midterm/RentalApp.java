@@ -2,12 +2,34 @@ package co.grandcircus.midterm;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class RentalApp {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Scanner scnr = new Scanner(System.in);
+		
+		System.out.println("Hello! Welcome to Away for the Day. How can we help you escape today?: ");
+		System.out.println("1. View all properties\n");
+		System.out.println("2. Search properties by location\n");
+		System.out.println("3. Search properties by availability\n");
+		System.out.println("4. Search properties by rental type\n\n");
+		int userChoice = scnr.nextInt();
+		
+		if(userChoice == 1) {
+			//need to create method for displaying properties
+			viewProperties();
+		} else if(userChoice == 2) {
+			//need to create method for searching by properties
+			searchByLocation();
+		} else if(userChoice == 3) {
+			//need to create method for searching by properties
+			searchByAvailability();
+		} else {
+			searchByPropertyType();
+		}
+	
 	}
 
 
