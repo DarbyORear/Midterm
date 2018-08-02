@@ -78,8 +78,8 @@ public static void searchByLocation() {
 
 
 
-public static void viewProperties() {
-		// TODO Auto-generated method stub
+public static void viewProperties(Array<Property>) {
+		
 		
 	}
 
