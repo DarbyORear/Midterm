@@ -1,6 +1,6 @@
 package co.grandcircus.midterm;
 
-public class RentalProperty {
+public class Property {
 	private String name;
 	private String type;
 	private String location;
@@ -8,11 +8,13 @@ public class RentalProperty {
 	private double price;
 	private boolean available;
 	
-	public RentalProperty(String name, String type, String location, String amenities, double price, boolean available) {
-		
+	public Property(String name, String type, String location, String amenities, double price, boolean available) {
+		this.name = name;
+		this.type = type;
+		this.location = location;
 	}
 	
-	public RentalProperty() {
+	public Property() {
 		
 	}
 
