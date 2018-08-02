@@ -37,6 +37,46 @@ public class RentalApp {
 
 
 
+public static void searchByPropertyType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+private static void searchByAvailability() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+public static void searchByLocation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+public static void viewProperties() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
 //reservation confirmation method:
 public void ReservationConfirmation(/*will it take an argument?*/) {
 	String renterName="";
