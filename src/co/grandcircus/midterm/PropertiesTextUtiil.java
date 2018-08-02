@@ -12,9 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PropertiesTextUtiil {
-	
 
-	public static ArrayList<Property> readFromFile_newWay(String file) {
+	public static ArrayList<Property> readFromFile(String file) {
 		ArrayList<Property> allRentals = new ArrayList<>();
 		String line;
 
@@ -23,21 +22,18 @@ public class PropertiesTextUtiil {
 		 * resources automatically at the end Note the use of parenthesis (BEFORE THE
 		 * BRACES) where the resources are stored
 		 */
-		try (
-				FileInputStream inFile = new FileInputStream(file);
-				Scanner input = new Scanner(inFile);
-		) 
-		{
-			//while there is a line to be read, continues reading, converting to country, then adding to list
+		try (FileInputStream inFile = new FileInputStream(file); Scanner input = new Scanner(inFile);) {
+			// while there is a line to be read, continues reading, converting to country,
+			// then adding to list
 			while (input.hasNext()) {
 				line = input.nextLine();
 				allRentals.add(convertLineToProperty(line));
 			}
-			
-			//Catches exception if file is not found
+
+			// Catches exception if file is not found
 		} catch (FileNotFoundException ex) {
 			System.out.println("Sorry, file does not exist");
-			//Catches any other exceptions
+			// Catches any other exceptions
 		} catch (IOException ex) {
 			System.out.println("Sorry, there was an error.");
 			ex.printStackTrace();
@@ -47,13 +43,13 @@ public class PropertiesTextUtiil {
 
 	}
 
-	
-	//Convert line from .txt file into a country
+	// Convert line from .txt file into a country
 	public static Property convertLineToProperty(String line) {
-		//Split string by separator into array of variable values
+		// Split string by separator into array of variable values
 		String[] pieces = line.split(",");
-		
-		//Assign, and convert as needed, each piece of array to corresponding location in country constructor
+
+		// Assign, and convert as needed, each piece of array to corresponding location
+		// in country constructor
 		String name = pieces[0];
 		String type = pieces[1];
 		String location = pieces[2];
@@ -61,7 +57,7 @@ public class PropertiesTextUtiil {
 		double price = Double.parseDouble(pieces[4]);
 		boolean available = Boolean.parseBoolean(pieces[5]);
 		Property property = new Property(name, type, location, amenities, price, available);
-		
+
 		return property;
 	}
 
@@ -69,13 +65,13 @@ public class PropertiesTextUtiil {
 		String line = property.toString();
 		return line;
 	}
-	
-	//Creates new file path
+
+	// Creates new file path
 	public static void createFilePath(String file) {
-		//Converts the string path to an actual path object for uses with Files class
+		// Converts the string path to an actual path object for uses with Files class
 		Path path = Paths.get(file);
-		
-		//If the path does not exist, creates the path
+
+		// If the path does not exist, creates the path
 		if (Files.notExists(path)) {
 			try {
 				Files.createFile(path);
@@ -91,35 +87,32 @@ public class PropertiesTextUtiil {
 
 		// Done the new/easy way with automatic resource closing
 		try (
-			// the false tells the code to overwrite the program as opposed to adding to it
-			FileOutputStream outFile = new FileOutputStream(newPath, false);
-			PrintWriter output = new PrintWriter(outFile);
-		) {
-			//Converts the countries to strings and writes them to a file
+				// the false tells the code to overwrite the program as opposed to adding to it
+				FileOutputStream outFile = new FileOutputStream(newPath, false);
+				PrintWriter output = new PrintWriter(outFile);) {
+			// Converts the countries to strings and writes them to a file
 			for (Property property : allRentals) {
 				output.println(convertPropertyToLine(property));
 			}
-			//Catches exception thrown when file is not found
+			// Catches exception thrown when file is not found
 		} catch (FileNotFoundException ex) {
 			System.out.println("Sorry, the output file does not exist.");
-			
-			//Catches all other exceptions
+
+			// Catches all other exceptions
 		} catch (IOException ex) {
 			System.out.println("Sorry, something unexpected occurred.");
 			ex.printStackTrace();
 		}
 	}
 
-	//Appends a single line to the file, instead of overwriting the whole thing
+	// Appends a single line to the file, instead of overwriting the whole thing
 	public static void appendToFile(Property property, String newPath) {
-		
+
 		// Done the new/easy way with automatic resource closing
 		try (
-			// the false tells the code to overwrite the program as opposed to adding to it
-			FileOutputStream outFile = new FileOutputStream(newPath, true);
-			PrintWriter output = new PrintWriter(outFile);
-		) 
-		{
+				// the false tells the code to overwrite the program as opposed to adding to it
+				FileOutputStream outFile = new FileOutputStream(newPath, true);
+				PrintWriter output = new PrintWriter(outFile);) {
 			output.println(convertPropertyToLine(property));
 		} catch (FileNotFoundException ex) {
 			System.out.println("Sorry, the output file does not exist.");
@@ -129,5 +122,4 @@ public class PropertiesTextUtiil {
 		}
 	}
 
-	
 }
