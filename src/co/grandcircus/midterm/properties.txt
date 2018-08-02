@@ -1,12 +1,12 @@
 River Creek, Downtown, Loft, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront, 1750.00, true
-Honey Bee, West Side, Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 100.00, true
+Honey Bee, Corktown, Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 100.00, true
 Belle Isle Boat House, Downtown, Cottage, Free Parking Garage Kitchen Iron Washer Dryer Microwave Refrigerator Stove Oven Waterfront, 300.00, true
-Woodward Springs, East Side,  Condo, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 160.00, true
-Grand Hideout, West Side, Loft, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront, 145.00, true
-Sherwood Row, West Side, Condo, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 130.00, true
-Highland Ave, East Side,  Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Over Waterfront, 85.00, true
+Woodward Springs, West Village,  Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 160.00, true
+Grand Hideout, Corktown, Loft, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront, 145.00, true
+Sherwood Row, Midtown, Condo, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 130.00, true
+Highland Ave, Midtown,  Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Over Waterfront, 85.00, true
 Greektown, Downtown,  Condo, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Over Waterfront, 175.00, true
 Corktown City, Downtown,  Loft, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Over Waterfront, 125.00, true
-Portland Towers, West Side,  Condo, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Over Waterfront, 115.00, true
-Kenmore Waters, East Side, Cottage, Free Parking Kitchen Iron Washer Dryer Microwave Refrigerator Stove Oven Waterfront, 200.00, true
-West Village Views, East Side,  Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 150.00, true
+Portland Towers, Corktown,  Condo, Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Over Waterfront, 115.00, true
+Kenmore Waters, Downtown, Cottage, Free Parking Kitchen Iron Washer Dryer Microwave Refrigerator Stove Oven Waterfront, 200.00, true
+West Village Views, West Village,  Single Family, Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven, 150.00, true
