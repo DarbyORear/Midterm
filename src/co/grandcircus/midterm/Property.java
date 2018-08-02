@@ -12,6 +12,9 @@ public class Property {
 		this.name = name;
 		this.type = type;
 		this.location = location;
+		this.amenities = amenities;
+		this.price = price;
+		this.available = available;
 	}
 	
 	public Property() {

@@ -13,47 +13,9 @@ import java.util.Scanner;
 
 public class PropertiesTextUtiil {
 	
-	//Reads from file the longer way (for practice, don't need to use)
-	public static ArrayList<Property> readFromFile_oldWay(String file) {
-		//Defines variables
+
+	public static ArrayList<Property> readFromFile_newWay(String file) {
 		ArrayList<Property> allRentals = new ArrayList<>();
-		FileInputStream inFile = null;
-		Scanner input = null;
-		String line;
-
-		//Creates resources to get input from file
-		try {
-			inFile = new FileInputStream(file);
-			input = new Scanner(inFile);
-
-			//while there is a line to read, will read line, convert to country, and add to list
-			while (input.hasNext()) {
-				line = input.nextLine();
-				allRentals.add(convertLineToProperty(line));
-			}
-			//Catches exception if file is not found and prints error msg
-		} catch (FileNotFoundException ex) {
-			System.out.println("Sorry, file does not exist.");
-		} finally {
-			//closes the resources whether the reading was successful or not
-			if (input != null) {
-				input.close();
-			}
-			if (inFile != null) {
-				try {
-					inFile.close();
-				} catch (IOException ex) {
-					System.out.println("Sorry, failed to close stream.");
-					ex.printStackTrace();
-				}
-			}
-		}
-		return allRentals;
-
-	}
-
-	public static ArrayList<Property> readFromFile_newWay(String filePath) {
-		ArrayList<Property> allCountries = new ArrayList<>();
 		String line;
 
 		/*
@@ -62,14 +24,14 @@ public class PropertiesTextUtiil {
 		 * BRACES) where the resources are stored
 		 */
 		try (
-				FileInputStream inFile = new FileInputStream(filePath);
+				FileInputStream inFile = new FileInputStream(file);
 				Scanner input = new Scanner(inFile);
 		) 
 		{
 			//while there is a line to be read, continues reading, converting to country, then adding to list
 			while (input.hasNext()) {
 				line = input.nextLine();
-				allCountries.add(convertLineToProperty(line));
+				allRentals.add(convertLineToProperty(line));
 			}
 			
 			//Catches exception if file is not found
@@ -81,34 +43,37 @@ public class PropertiesTextUtiil {
 			ex.printStackTrace();
 		}
 
-		return allCountries;
+		return allRentals;
 
 	}
 
 	
 	//Convert line from .txt file into a country
 	public static Property convertLineToProperty(String line) {
-		//Split string by separator into array of properties
-		String[] pieces = line.split("[+][+]");
+		//Split string by separator into array of variable values
+		String[] pieces = line.split(",");
 		
 		//Assign, and convert as needed, each piece of array to corresponding location in country constructor
 		String name = pieces[0];
-		String continent = pieces[1];
-		boolean visited = Boolean.parseBoolean(pieces[2]);
-		Property country = new Property(name, type, location, amenities, price, available);
+		String type = pieces[1];
+		String location = pieces[2];
+		String amenities = pieces[3];
+		double price = Double.parseDouble(pieces[4]);
+		boolean available = Boolean.parseBoolean(pieces[5]);
+		Property property = new Property(name, type, location, amenities, price, available);
 		
-		return country;
+		return property;
 	}
 
-	public static String convertPropertyToLine(Property country) {
-		String line = country.toString();
+	public static String convertPropertyToLine(Property property) {
+		String line = property.toString();
 		return line;
 	}
 	
 	//Creates new file path
-	public static void createFilePath(String filePath) {
+	public static void createFilePath(String file) {
 		//Converts the string path to an actual path object for uses with Files class
-		Path path = Paths.get(filePath);
+		Path path = Paths.get(file);
 		
 		//If the path does not exist, creates the path
 		if (Files.notExists(path)) {
@@ -122,7 +87,7 @@ public class PropertiesTextUtiil {
 		}
 	}
 
-	public static void writeToFile(ArrayList<Property> allCountries, String newPath) {
+	public static void writeToFile(ArrayList<Property> allRentals, String newPath) {
 
 		// Done the new/easy way with automatic resource closing
 		try (
@@ -131,8 +96,8 @@ public class PropertiesTextUtiil {
 			PrintWriter output = new PrintWriter(outFile);
 		) {
 			//Converts the countries to strings and writes them to a file
-			for (Property country : allCountries) {
-				output.println(convertPropertyToLine(country));
+			for (Property property : allRentals) {
+				output.println(convertPropertyToLine(property));
 			}
 			//Catches exception thrown when file is not found
 		} catch (FileNotFoundException ex) {
@@ -146,7 +111,7 @@ public class PropertiesTextUtiil {
 	}
 
 	//Appends a single line to the file, instead of overwriting the whole thing
-	public static void appendToFile(Property country, String newPath) {
+	public static void appendToFile(Property property, String newPath) {
 		
 		// Done the new/easy way with automatic resource closing
 		try (
@@ -155,7 +120,7 @@ public class PropertiesTextUtiil {
 			PrintWriter output = new PrintWriter(outFile);
 		) 
 		{
-			output.println(convertPropertyToLine(country));
+			output.println(convertPropertyToLine(property));
 		} catch (FileNotFoundException ex) {
 			System.out.println("Sorry, the output file does not exist.");
 		} catch (IOException ex) {
@@ -164,13 +129,5 @@ public class PropertiesTextUtiil {
 		}
 	}
 
-	/*
-	 *create arraylist of original countries we add, then write those
-	 * countries to file we will read from (starting countries) then use read from
-	 * method to read from that file to output list of countries when we print the
-	 * menu nd they choose see countries if they choose to enter a country and the
-	 * arraylist doesn't already contain that country, use the append method to add
-	 * that country
-	 */
-
+	
 }
