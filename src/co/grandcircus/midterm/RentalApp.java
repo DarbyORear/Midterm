@@ -7,19 +7,23 @@ import java.util.Scanner;
 public class RentalApp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner scnr = new Scanner(System.in);
+		String cont;
+		boolean resume;
 		
-		System.out.println("Hello! Welcome to Away for the Day. How can we help you escape today?: ");
+		Scanner scnr = new Scanner(System.in);
+		do {
+		System.out.println("Hello! Welcome to Away for the Day.");
 		System.out.println("1. View all properties\n");
 		System.out.println("2. Search properties by location\n");
 		System.out.println("3. Search properties by availability\n");
-		System.out.println("4. Search properties by rental type\n\n");
-		int userChoice = scnr.nextInt();
+		System.out.println("4. Search properties by rental type\n");
+		System.out.println("5. Exit the program\n");
+		int userChoice = Validator.getInt(scnr,"How can we help you escape today?: ", 1, 5);
 		
 		if(userChoice == 1) {
 			//need to create method for displaying properties
 			viewProperties();
+//			System.out.println("Would you like to choose another option");
 		} else if(userChoice == 2) {
 			//need to create method for searching by properties
 			searchByLocation();
@@ -29,7 +33,14 @@ public class RentalApp {
 		} else {
 			searchByPropertyType();
 		}
-	
+		cont = Validator.getStringMatchingRegex(scnr, "Would you like to choose another option? (y/n): ", "Y|yes|N|no");
+			if(cont.toLowerCase().startsWith("y")) {
+				resume = true;
+			} else {
+				resume = false;
+				break;
+			}
+	}while(resume);
 	}
 
 
