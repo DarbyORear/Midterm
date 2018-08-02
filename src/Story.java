@@ -8,7 +8,7 @@ public class Story {
 				"Once upon a time in the mystical land of Shangrila there dwelt an immortal named David and his trusty band of students.");
 
 		System.out.println(
-				"David and his students were on a very dangerous mission. They had to be stealthy. They had to be quick.");
+				"Darby and her students were on a very dangerous mission. They had to be stealthy. They had to be quick.");
 
 		System.out.println("This rescue mission would be dangerous, but the monkeys had been preparing.");
 	}
