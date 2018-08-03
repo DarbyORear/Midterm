@@ -102,9 +102,9 @@ public class RentalApp {
 		System.out.println("3. Modern Single Family");
 		System.out.println("4. Cozy Cottage");
 	}
-
 	private static void searchByAvailableDates() {
 		// TODO Auto-generated method stub
+
 
 	}
 
