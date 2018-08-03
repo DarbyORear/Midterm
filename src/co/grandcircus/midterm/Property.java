@@ -1,5 +1,7 @@
 package co.grandcircus.midterm;
 
+import java.time.LocalDate;
+
 public class Property {
 	private String name;
 	private String type;
@@ -7,14 +9,15 @@ public class Property {
 	private String amenities;
 	private double price;
 	private boolean available;
+	private LocalDate dateAvailable;
 	
-	public Property(String name, String type, String location, String amenities, double price, boolean available) {
+	public Property(String name, String type, String location, String amenities, double price, LocalDate dateAvailable) {
 		this.name = name;
 		this.type = type;
 		this.location = location;
 		this.amenities = amenities;
 		this.price = price;
-		this.available = available;
+		this.dateAvailable = dateAvailable;
 	}
 	
 	public Property() {
@@ -68,10 +71,20 @@ public class Property {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+	
+	
+
+	public LocalDate getDateAvailable() {
+		return dateAvailable;
+	}
+
+	public void setDateAvailable(LocalDate dateAvailable) {
+		this.dateAvailable = dateAvailable;
+	}
 
 	@Override
 	public String toString() {
-		return name + "," + location + "," + type + "," + amenities + "," + price + "," + available;
+		return name + "," + location + "," + type + "," + amenities + "," + price + "," + dateAvailable;
 	}
 	
 	

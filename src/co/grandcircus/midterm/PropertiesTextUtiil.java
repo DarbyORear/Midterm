@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -55,8 +56,8 @@ public class PropertiesTextUtiil {
 		String location = pieces[2];
 		String amenities = pieces[3];
 		double price = Double.parseDouble(pieces[4]);
-		boolean available = Boolean.parseBoolean(pieces[5]);
-		Property property = new Property(name, type, location, amenities, price, available);
+		LocalDate dateAvailable = LocalDate.parse(pieces[5]);
+		Property property = new Property(name, type, location, amenities, price, dateAvailable);
 
 		return property;
 	}

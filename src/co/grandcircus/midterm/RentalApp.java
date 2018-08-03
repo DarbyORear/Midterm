@@ -69,7 +69,7 @@ public class RentalApp {
 		} while (resume);
 	}
 
-	public static void searchByPropertyType(Scanner scnr, ArrayList<Property> allRentals) {
+	public static void searchByPropertyType(Scanner scnr, ArrayList<Property> allRentals, LocalDate date, int duration) {
 		viewPropertyMenu();
 		int propertyChoice = Validator.getInt(scnr, "What type of rental are you looking for?", 1, 4);
 
@@ -95,6 +95,8 @@ public class RentalApp {
 		default:
 			propertyType = null;
 		}
+		
+		System.out.println("Here are all of our available " + propertyType + " properties: ");
 		for (Property property : allRentals) {
 			if (property.getType().equals(propertyType)) {
 				System.out.println(count + ". " + property.getName());
@@ -102,6 +104,9 @@ public class RentalApp {
 				count++;
 			}
 		}
+		
+		System.out.println("Sorry, these " + propertyType + " properties are not available for your desired dates: ");
+		//add for statement to include properties that are of property type that are true for available on that date
 
 		// Used count - 1 because it will increment at the end of for loop, even when
 		// all items have been added already
@@ -114,10 +119,10 @@ public class RentalApp {
 	public static Property viewFullDetails(Map<Integer, Property> byType, int propertyPick) {
 		Property theProperty = byType.get(propertyPick);
 
-		String format = "%-30s %-30s";
+		String format = "%-30s %-30s %-30s %-30s";
 		System.out.println("You have selected " + theProperty.getName() + ". Here are the full details: \n");
-
-		System.out.printf(format, theProperty.getName(), theProperty.getLocation());
+//Modifyy to include ALL details about this property
+		System.out.printf(format, theProperty.getName(), theProperty.getLocation(), "$" + theProperty.getPrice());
 
 	}
 
