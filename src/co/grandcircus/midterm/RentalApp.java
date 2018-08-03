@@ -2,6 +2,8 @@ package co.grandcircus.midterm;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class RentalApp {
@@ -63,6 +65,8 @@ public class RentalApp {
 		int propertyChoice = Validator.getInt(scnr, "What type of rental are you looking for?", 1, 4);
 
 		String propertyType;
+		Map<Integer, Property> byType = new HashMap<>();
+
 		int count = 1;
 		int propertyPick;
 
@@ -85,15 +89,32 @@ public class RentalApp {
 		for (Property property : allRentals) {
 			if (property.getType().equals(propertyType)) {
 				System.out.println(count + ". " + property.getName());
+				byType.put(count, property);
 				count++;
 			}
 		}
 
+		
+		//Used count - 1 because it will increment at the end of for loop, even when all items have been added already
 		propertyPick = Validator.getInt(scnr, "Which " + propertyType + " would you like to view?", 1, count - 1);
-
-		// viewFullDetails();
-
+		
+		
+		viewFullDetails(byType, propertyPick);
+		
+		
+		
+		
 	}
+
+	public static Property viewFullDetails(Map<Integer, Property> byType, int propertyPick) {
+		Property theProperty = byType.get(propertyPick);
+		
+	}
+
+
+
+
+
 
 	public static void viewPropertyMenu() {
 		System.out.println("Great! Let's explore the variety of properties we offer: ");
