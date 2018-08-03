@@ -7,6 +7,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Validator {
 
@@ -175,6 +177,36 @@ public class Validator {
 				// If exception doesn't occur, it's valid.
 				isValid = true;
 			} catch (ParseException ex) {
+				// If exception occurs, it's invalid.
+				isValid = false;
+				System.out.println("Enter a valid date in format mm/dd/yyyy.");
+			}
+
+		} while (!isValid);
+		return date;
+	}
+	
+	public static LocalDate getLocalDate(Scanner scnr, String prompt) {
+//		SimpleDateFormat format = new SimpleDateFormat("mm/dd/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/DD/YYYY");
+//		format.setLenient(false);
+		boolean isValid = false;
+		LocalDate date = null;
+		String input;
+		do {
+			// Step 1: get the raw string
+			input = getString(scnr, prompt);
+			// Step 2: convert it to a date
+			try {
+				// format.parse throws a ParseException, which is a checked exception and MUST
+				// be caught.
+//				date = format.parse(input);
+//				date = formatter.ofPattern("MM/dd/yyyy");
+				date = LocalDate.parse(input, formatter);
+				
+				// If exception doesn't occur, it's valid.
+				isValid = true;
+			} catch (Exception ex) {
 				// If exception occurs, it's invalid.
 				isValid = false;
 				System.out.println("Enter a valid date in format mm/dd/yyyy.");
