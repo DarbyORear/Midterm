@@ -19,8 +19,9 @@ public class RentalApp {
 		System.out.println(
 				"We are a company based in Detroit that operates an online marketplace\nand hospitality service for people to rent short-term lodging");
 
-		String humanName = Validator.getString(scnr,
-				"I'd love to know who I'm working with. Please provide me with your full name (first and last) so I know with whom I'm working with:\n");
+		String humanName = Validator.getStringMatchingRegex(scnr,
+				"I'd love to know who I'm working with. Please provide me with your full name (first and last) so I know with whom I'm working with:\n",
+				"^[a-z]+\\s[a-z]+$", false);
 
 		System.out.println("\nThanks, " + humanName
 				+ "!\nWe can now start the process of finding you a lovely place to rest your head for a few nights.\n");
@@ -93,34 +94,24 @@ public class RentalApp {
 				count++;
 			}
 		}
-		
-		//Used count - 1 because it will increment at the end of for loop, even when all items have been added already
+
+		// Used count - 1 because it will increment at the end of for loop, even when
+		// all items have been added already
 		propertyPick = Validator.getInt(scnr, "Which " + propertyType + " would you like to view?", 1, count - 1);
-		
-		
+
 		viewFullDetails(byType, propertyPick);
-		
-		
-		
-		
+
 	}
 
 	public static Property viewFullDetails(Map<Integer, Property> byType, int propertyPick) {
 		Property theProperty = byType.get(propertyPick);
-		
+
 		String format = "%-30s %-30s";
 		System.out.println("You have selected " + theProperty.getName() + ". Here are the full details: \n");
-		
-		
+
 		System.out.printf(format, theProperty.getName(), theProperty.getLocation());
-		
-		
+
 	}
-
-
-
-
-
 
 	public static void viewPropertyMenu() {
 		System.out.println("Great! Let's explore the variety of properties we offer: ");
@@ -129,9 +120,9 @@ public class RentalApp {
 		System.out.println("3. Modern Single Family");
 		System.out.println("4. Cozy Cottage");
 	}
+
 	private static void searchByAvailableDates() {
 		// TODO Auto-generated method stub
-
 
 	}
 
