@@ -93,7 +93,6 @@ public class RentalApp {
 				count++;
 			}
 		}
-
 		
 		//Used count - 1 because it will increment at the end of for loop, even when all items have been added already
 		propertyPick = Validator.getInt(scnr, "Which " + propertyType + " would you like to view?", 1, count - 1);
@@ -108,6 +107,13 @@ public class RentalApp {
 
 	public static Property viewFullDetails(Map<Integer, Property> byType, int propertyPick) {
 		Property theProperty = byType.get(propertyPick);
+		
+		String format = "%-30s %-30s";
+		System.out.println("You have selected " + theProperty.getName() + ". Here are the full details: \n");
+		
+		
+		System.out.printf(format, theProperty.getName(), theProperty.getLocation());
+		
 		
 	}
 
