@@ -17,25 +17,33 @@ public class RentalApp {
 		System.out.println("Welcome to Away for the Day!\n");
 
 		System.out.println(
-				"We are a company based in Detroit that operates an online marketplace\nand hospitality service for people to rent short-term lodging");
+				"We are a Startup based in Detroit that operates an online marketplace\nand hospitality service for people to rent short-term lodging");
 
 		String humanName = Validator.getStringMatchingRegex(scnr,
-				"I'd love to know who I'm working with. Please provide me with your full name (first and last) so I know with whom I'm working with:\n",
+				"I'd love to know who I'm working with. Please provide me with your full name (first & last) so I know with whom I'm working with:\n",
 				"^[a-z]+\\s[a-z]+$", false);
 
-		System.out.println("\nThanks, " + humanName
-				+ "!\nWe can now start the process of finding you a lovely place to rest your head for a few nights.\n");
+		String[] name = humanName.split(" ");
 
-		System.out.println("Go ahead and check out our lovely list of properies below\n");
+		String firstName = name[0];
+		String lastName = name[1];
+
+		System.out.println("\nThanks, " + firstName
+				+ "!\nWe are close to starting the process of finding you a lovely place to rest your head at for a few nights.\n");
+
+		System.out.println("Now let me know when you are you looking to book your experience with us: (DD/MM/YYYY)\n");
+
+		System.out.println("Awesome! Now it's time to get this party started...\n");
 
 		do {
-			// System.out.println("Hello! Welcome to Away for the Day.");
-			// System.out.println("1. View all properties\n");
-			// System.out.println("2. Search properties by location\n");
-			// System.out.println("3. Search properties by availability\n");
-			// System.out.println("4. Search properties by rental type\n");
-			// System.out.println("5. Exit the program\n");
-			int userChoice = Validator.getInt(scnr, "How can we help you escape today?: ", 1, 5);
+			System.out.println("1. View Available Properties");
+			System.out.println("2. View All Properties\n");
+			System.out.println("3. Search Properties by Location\n");
+			System.out.println("4. Search properties by Availability\n");
+			System.out.println("5. Search Properties by Rental Type\n");
+			System.out.println("6. Depart\n");
+
+			int userChoice = Validator.getInt(scnr, "\nHow can we help you escape today?: ", 1, 6);
 
 			if (userChoice == 1) {
 				// need to create method for displaying properties
