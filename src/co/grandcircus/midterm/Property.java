@@ -8,7 +8,6 @@ public class Property {
 	private String location;
 	private String amenities;
 	private double price;
-	private boolean available;
 	private LocalDate dateAvailable;
 	
 	public Property(String name, String type, String location, String amenities, double price, LocalDate dateAvailable) {
@@ -64,15 +63,6 @@ public class Property {
 		this.price = price;
 	}
 
-	public boolean isAvailable() {
-		return available;
-	}
-
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
-	
-	
 
 	public LocalDate getDateAvailable() {
 		return dateAvailable;
@@ -82,6 +72,23 @@ public class Property {
 		this.dateAvailable = dateAvailable;
 	}
 
+	public String getFullDetails() {
+		String format = "%-30s %-30s\n %-30s %-30s\n";
+		String details = String.format(format, name, location, type, dateAvailable);
+		String[] allAmenities = amenities.split(" ");
+		details += "This property features ";
+		
+		for (String amenity : allAmenities) {
+			
+			if (!amenity.equals(allAmenities[allAmenities.length - 1])) {
+				details += amenity + " ";
+			}
+			else {
+				details += "and " + amenity + ".";
+			}
+		}
+		return details;
+	}
 	@Override
 	public String toString() {
 		return name + "," + location + "," + type + "," + amenities + "," + price + "," + dateAvailable;

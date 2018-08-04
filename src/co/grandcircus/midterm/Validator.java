@@ -146,7 +146,7 @@ public class Validator {
 				match = pattern.matcher(input);
 			}
 
-			if (match.find()) {
+			if (match.matches()) {
 				isValid = true;
 			} else {
 				System.out.println("Invalid Entry. Please try again.");
