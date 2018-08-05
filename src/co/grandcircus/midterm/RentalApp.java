@@ -272,13 +272,14 @@ public class RentalApp {
 		String location;
 		Map<Integer, Property> byLocation = new HashMap<>();
 
-		int count = 1;
+		int count;
 		int propertyPick;
 		String reserve;
 		String resumeSearch;
 		boolean searchHere;
 		
 		do {
+			count = 1;
 			searchHere = true;
 			viewLocationMenu();
 			int propertyChoice = Validator.getInt(scnr, "Where would you like to escape?", 1, 5);
