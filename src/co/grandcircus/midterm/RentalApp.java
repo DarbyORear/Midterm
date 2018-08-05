@@ -148,8 +148,13 @@ public class RentalApp {
 		else {
 			System.out.println("Aww, we're sorry we were unable to meet your needs for these dates.");
 			startOver = Validator.getStringMatchingRegex(scnr, "Would you like to explore our availability for different dates? (y/n)", "y|n|yes|no", false);
+			
 			if (startOver.toLowerCase().startsWith("y")) {
 				pickDates(scnr, allRentals, firstName, fullName);
+			}
+			else {
+				//Want program to terminate
+				System.out.println("Thanks for stopping by! Goodbye.");
 			}
 		}
 		
@@ -196,8 +201,9 @@ public class RentalApp {
 				
 				String format = "%-30s %-30s %-30s %-30s";
 				System.out.printf(format, "Property Name", "Location", "Price Per Night", "Availability");
+				System.out.println();
 				for (Property property : allRentals) {
-					if (property.getType().equals(propertyType) 
+					if (property.getType().matches(propertyType) 
 							&& (startDate.isAfter(property.getDateAvailable()) || startDate.isEqual(property.getDateAvailable()))) {
 						System.out.printf(format, count + ". " + property.getName(), property.getLocation(), "$" + property.getPrice(), "Available Now");
 						System.out.println();
@@ -209,7 +215,7 @@ public class RentalApp {
 				System.out.println();
 				System.out.println("Sorry, these " + propertyType + " properties are not available for your desired dates: ");
 				for (Property property : allRentals) {
-					if (property.getType().equals(propertyType) 
+					if (property.getType().matches(propertyType) 
 							&& startDate.isBefore(property.getDateAvailable())) {
 						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
 						System.out.println();
