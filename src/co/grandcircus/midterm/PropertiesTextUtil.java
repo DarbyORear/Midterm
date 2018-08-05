@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,7 +57,7 @@ public class PropertiesTextUtil {
 		String location = pieces[2];
 		String amenities = pieces[3];
 		double price = Double.parseDouble(pieces[4]);
-		LocalDate dateAvailable = LocalDate.parse(pieces[5]);
+		LocalDate dateAvailable = LocalDate.parse(pieces[5], DateTimeFormatter.ofPattern("MM/dd/uuuu"));
 		Property property = new Property(name, type, location, amenities, price, dateAvailable);
 
 		return property;

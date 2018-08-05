@@ -2,6 +2,7 @@ package co.grandcircus.midterm;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,10 +19,10 @@ public class RentalApp {
 		System.out.println("Welcome to Away for the Day!\n");
 
 		System.out.println(
-				"We are a Startup based in Detroit that operates an online marketplace\nand hospitality service for people to rent short-term lodging");
+				"We are a Startup based in Detroit that operates an online marketplace and hospitality service for people to rent short-term lodging");
 
 		String fullName = Validator.getStringMatchingRegex(scnr,
-				"I'd love to know who I'm working with. Please provide me with your full name (first & last) so I know with whom I'm working with:\n",
+				"I'd love to know who I'm working with. Please provide me with your full name (first & last):\n",
 				"^[a-z]+\\s[a-z]+$", false);
 
 		String[] name = fullName.split(" ");
@@ -29,26 +30,34 @@ public class RentalApp {
 		String firstName = name[0];
 		
 		System.out.println("\nThanks, " + firstName
-				+ "!\nWe are close to starting the process of finding you a lovely place to rest your head at for a few nights.\n");
+				+ "!\nWe are starting the process of finding you a lovely place to rest your head for a few nights.\n");
 
 		pickDates(scnr, allRentals, firstName, fullName);
 		
 		
+		scnr.close();
 	}
+	
 	
 	public static void pickDates(Scanner scnr, ArrayList<Property> allRentals, String firstName, String fullName) {
 		LocalDate startDate;
 		LocalDate endDate;
 		
-			System.out.println("Now let me know when you are you looking to book your experience with us: (DD/MM/YYYY)\n");
-			
-			//Darby, you can enter lines for start and end date here (use the prompt above)
+		startDate = Validator.getLocalDate(scnr, "Now let me know when you are you looking to book your experience with us (MM/DD/YYYY): \n");
 
-			System.out.println("Awesome! Now it's time to get this party started...\n");
+		int numDays = Validator.getInt(scnr, "How many days would you like to stay? \n");
+
+		endDate = startDate.plusDays(numDays);
+
+		System.out.println("Your trip will start " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + " and end " + endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+
+		System.out.println("Awesome! Now it's time to get this party started...\n");
 			
-			viewMainMenu(scnr, allRentals, startDate, endDate, firstName, fullName);
+		viewMainMenu(scnr, allRentals, startDate, endDate, firstName, fullName);
 			
 	}
+	
+	
 	public static void viewMainMenu(Scanner scnr, ArrayList<Property> allRentals, LocalDate startDate, LocalDate endDate, String firstName, String fullName) {
 		String cont;
 		boolean resume;
@@ -88,6 +97,7 @@ public class RentalApp {
 			}
 		} while (resume);
 	}
+	
 	
 	public static void viewProperties(Scanner scnr, ArrayList<Property> allRentals, LocalDate startDate, LocalDate endDate, boolean viewAll, String firstName, String fullName) {
 		String reserve;
@@ -349,6 +359,8 @@ public class RentalApp {
 		System.out.println("5. Return to main menu");
 	}
 	
+	
+	
 	public static void reserveProperty(Scanner scnr, ArrayList<Property> allRentals, Map<Integer, Property> finalOptions, int propertyPick, LocalDate startDate, LocalDate endDate, String firstName, String fullName) {
 		String confirmation;
 		double fullPrice;
@@ -385,6 +397,8 @@ public class RentalApp {
 			viewMainMenu(scnr, allRentals, startDate, endDate, firstName, fullName);
 		}
 	}
+	
+	
 
 	// reservation confirmation method:
 	public static void reservationConfirmation(Property property, LocalDate startDate, LocalDate endDate, int numDays, String price, String firstName, String fullName) {
@@ -401,4 +415,5 @@ public class RentalApp {
 		System.out.println("Rental dates: " + startDate + " - " + endDate + "\n");
 
 	}
+	
 }
