@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 public class Property {
 	private String name;
-	private String type;
 	private String location;
+	private String type;
 	private String amenities;
 	private double price;
 	private LocalDate dateAvailable;
 	
-	public Property(String name, String type, String location, String amenities, double price, LocalDate dateAvailable) {
+	public Property(String name, String location, String type, String amenities, double price, LocalDate dateAvailable) {
 		this.name = name;
-		this.type = type;
 		this.location = location;
+		this.type = type;
 		this.amenities = amenities;
 		this.price = price;
 		this.dateAvailable = dateAvailable;

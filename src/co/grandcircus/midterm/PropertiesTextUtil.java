@@ -53,12 +53,12 @@ public class PropertiesTextUtil {
 		// Assign, and convert as needed, each piece of array to corresponding location
 		// in country constructor
 		String name = pieces[0];
-		String type = pieces[1];
-		String location = pieces[2];
+		String location = pieces[1];
+		String type = pieces[2];
 		String amenities = pieces[3];
 		double price = Double.parseDouble(pieces[4]);
 		LocalDate dateAvailable = LocalDate.parse(pieces[5], DateTimeFormatter.ofPattern("MM/dd/uuuu"));
-		Property property = new Property(name, type, location, amenities, price, dateAvailable);
+		Property property = new Property(name, location, type, amenities, price, dateAvailable);
 
 		return property;
 	}

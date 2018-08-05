@@ -63,6 +63,8 @@ public class RentalApp {
 		boolean resume;
 		
 		do {
+			resume = true;
+			
 			System.out.println("1. View Available Properties");
 			System.out.println("2. View All Properties\n");
 			System.out.println("3. Search Properties by Location\n");
@@ -85,17 +87,18 @@ public class RentalApp {
 			}
 			else {
 				System.out.println("Sorry to see you go. Thanks for stopping by!");
+				resume = false;
 				break;
 			}
 			cont = Validator.getStringMatchingRegex(scnr, "Would you like to choose another option? (y/n): ",
-					"Y|yes|N|no");
+					"Y|yes|N|no", false);
 			if (cont.toLowerCase().startsWith("y")) {
 				resume = true;
 			} else {
 				resume = false;
-				break;
 			}
-		} while (resume);
+		}
+		while (resume);
 	}
 	
 	
@@ -120,6 +123,8 @@ public class RentalApp {
 			}
 		}
 		System.out.println();
+		
+		
 		if (viewAll) {
 			System.out.println("Sorry, these properties are not available for your desired dates: ");
 			for (Property property : allRentals) {
@@ -273,10 +278,10 @@ public class RentalApp {
 	
 			switch (propertyChoice) {
 			case 1:
-				location = "Midtown";
+				location = "Downtown";
 				break;
 			case 2:
-				location = "Downtown";
+				location = "Midtown";
 				break;
 			case 3:
 				location = "West Village";
@@ -296,8 +301,9 @@ public class RentalApp {
 				
 				String format = "%-30s %-30s %-30s %-30s";
 				System.out.printf(format, "Property Name", "Location", "Price Per Night", "Availability");
+				System.out.println();
 				for (Property property : allRentals) {
-					if (property.getLocation().equals(location) 
+					if (property.getLocation().matches(location) 
 							&& (startDate.isAfter(property.getDateAvailable()) || startDate.isEqual(property.getDateAvailable()))) {
 						System.out.printf(format, count + ". " + property.getName(), property.getLocation(), "$" + property.getPrice(), "Available Now");
 						System.out.println();
@@ -306,10 +312,15 @@ public class RentalApp {
 					}
 				}
 				
+				//FIX-IT: Change .equals to .matches. 
+				//Add a line between headers and list
+				//add a temp array to store the unavailable properties and only print the details below if its not empty
+				//Adding option to verify the dates selected aree the actual dates they want
+				
 				System.out.println();
 				System.out.println("Sorry, these " + location + " properties are not available for your desired dates: ");
 				for (Property property : allRentals) {
-					if (property.getType().equals(location) 
+					if (property.getType().matches(location) 
 							&& startDate.isBefore(property.getDateAvailable())) {
 						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
 						System.out.println();
