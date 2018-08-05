@@ -110,9 +110,10 @@ public class RentalApp {
 		
 		String format = "%-30s %-30s %-30s %-30s";
 		System.out.printf(format, "Property Name", "Location", "Price Per Night", "Availability");
+		System.out.println();
 		for (Property property : allRentals) {
 			if (startDate.isAfter(property.getDateAvailable()) || startDate.isEqual(property.getDateAvailable())) {
-				System.out.printf(format, count + ". " + property.getName(), property.getLocation(), "$" + property.getPrice(), "Available Now");
+				System.out.printf(format, count + ". " + property.getName(), property.getLocation(), property.getPrice(), "Available Now");
 				System.out.println();
 				byAvailability.put(count, property);
 				count++;
