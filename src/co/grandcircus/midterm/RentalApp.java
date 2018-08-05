@@ -402,15 +402,15 @@ public class RentalApp {
 		
 		System.out.println("The price summary is as follows: ");
 		
-		String formattedPrice = String.format("%.2f", "" + fullPrice);
+		//Not working
 		
 		System.out.printf("%-80s\n %-80s\n %-80s\n", "Price per night: " + theProperty.getPrice(), 
-				"Number of nights: " + numDays, "Total price: " + formattedPrice);
+				"Number of nights: " + numDays, "Total price: " + fullPrice);
 		
 		confirmation = Validator.getStringMatchingRegex(scnr, "Would you like to confirm this reservation? (y/n)", "y|yes|no|n", false);
 		
 		if (confirmation.toLowerCase().startsWith("y")) {
-			reservationConfirmation(theProperty, startDate, endDate, numDays, formattedPrice, firstName, fullName);
+			reservationConfirmation(theProperty, startDate, endDate, numDays, fullPrice, firstName, fullName);
 		}
 		else {
 			System.out.println("That's okay! Let's go back to the menu and explore our other options!");
@@ -421,14 +421,14 @@ public class RentalApp {
 	
 
 	// reservation confirmation method:
-	public static void reservationConfirmation(Property property, LocalDate startDate, LocalDate endDate, int numDays, String price, String firstName, String fullName) {
+	public static void reservationConfirmation(Property property, LocalDate startDate, LocalDate endDate, int numDays, double fullPrice, String firstName, String fullName) {
 		
 		// Thank user for booking with us:
 		System.out.println("Thanks for booking with us, " + firstName + "!\nYour reservation has been confirmed.");
 		System.out.println("Here are the details of your researvation for your records:\n");
 
 		System.out.println("Name: " + fullName + "\n");
-		System.out.println("Total Price: " + "$" + price + "\n");
+		System.out.println("Total Price: " + "$" + fullPrice + "\n");
 		System.out.println("Property: " + property.getName() + "\n");
 		System.out.println("Location: " + property.getLocation() + "\n");
 		System.out.println("Duration of rental: " + numDays + "days.\n");
