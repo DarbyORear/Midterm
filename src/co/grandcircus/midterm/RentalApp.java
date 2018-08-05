@@ -165,13 +165,14 @@ public class RentalApp {
 		String propertyType;
 		Map<Integer, Property> byType = new HashMap<>();
 
-		int count = 1;
+		int count;
 		int propertyPick;
 		String reserve;
 		String resumeSearch;
 		boolean searchHere;
 		
 		do {
+			count = 1;
 			searchHere = true;
 			viewPropertyMenu();
 			int propertyChoice = Validator.getInt(scnr, "What type of rental are you looking for?", 1, 5);
