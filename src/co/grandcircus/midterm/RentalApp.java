@@ -264,10 +264,9 @@ public class RentalApp {
 				if (reserve.toLowerCase().startsWith("y")) {
 					// Used count - 1 because it will increment at the end of for loop, even when
 					// all items have been added already
+					System.out.println("Wonderful! We are happy we could meet your needs today.");
 					propertyPick = Validator.getInt(scnr,
-							"\nWonderful! We are happy we could meet your needs today.\nWhich " + propertyType
-									+ " would you like to reserve?",
-							1, count - 1);
+							"\nWhich " + propertyType + " would you like to reserve?", 1, count - 1);
 					reserveProperty(scnr, allRentals, byType, propertyPick, startDate, endDate, firstName, fullName);
 				}
 
@@ -482,6 +481,18 @@ public class RentalApp {
 		System.out.println("Duration of rental: " + numDays + "days.\n");
 		System.out.println("Rental dates: " + startDate + " - " + endDate + "\n");
 
+	}
+	
+	public static void checkOut(ArrayList<Property> allRentals, Reservation reservation, String file) {
+		for (Property property: allRentals) {
+			if (property.getName().matches(reservation.getPropertyName())) {
+				property.setDateAvailable(LocalDate.now());
+			}
+		}
+		System.out.println("Thank you for booking your experience with us! Your checkOut has been confimed. Goodbye!");
+		
+	
+		PropertiesTextUtil.writeToFile(allRentals, file);
 	}
 
 }
