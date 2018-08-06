@@ -69,6 +69,7 @@ public class RentalApp {
 		System.out.println("\nOkay, we have your planned getaway set to start on "
 				+ startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + " and end on "
 				+ endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "!");
+		
 
 		System.out.println("\nWe can't wait for you to see the amazing properites we have available for you.");
 
