@@ -36,11 +36,21 @@ public class RentalApp {
 
 		String firstName = name[0];
 
-		System.out.println("\nThanks, " + firstName + "!\nPlease let me know what you'd like to do today:\n");
 		System.out.println("1. Book New a Reservation");
 		System.out.println("2. View Existing Reservation\n");
+		int firstChoice = Validator.getInt(scnr,
+				"\nThanks, " + firstName + "!\nPlease let me know what you'd like to do today:\n", 1, 2);
 
-		pickDates(scnr, allRentals, firstName, fullName);
+		switch (firstChoice) {
+		case 1:
+			pickDates(scnr, allRentals, firstName, fullName);
+			break;
+		case 2:
+			findReservation(scnr, allRentals, firstName, fullName);
+			break;
+		default:
+			break;
+		}
 
 		scnr.close();
 	}
@@ -265,8 +275,8 @@ public class RentalApp {
 					// Used count - 1 because it will increment at the end of for loop, even when
 					// all items have been added already
 					System.out.println("Wonderful! We are happy we could meet your needs today.");
-					propertyPick = Validator.getInt(scnr,
-							"\nWhich " + propertyType + " would you like to reserve?", 1, count - 1);
+					propertyPick = Validator.getInt(scnr, "\nWhich " + propertyType + " would you like to reserve?", 1,
+							count - 1);
 					reserveProperty(scnr, allRentals, byType, propertyPick, startDate, endDate, firstName, fullName);
 				}
 
@@ -459,7 +469,8 @@ public class RentalApp {
 				"y|yes|no|n", false);
 
 		if (confirmation.toLowerCase().startsWith("y")) {
-			reservationConfirmation(theProperty, startDate, endDate, numDays, fullPrice, firstName, fullName);
+			reservationConfirmation(allRentals, theProperty, startDate, endDate, numDays, fullPrice, firstName,
+					fullName);
 		} else {
 			System.out.println("That's okay! Let's go back to the menu and explore our other options!");
 			viewMainMenu(scnr, allRentals, startDate, endDate, firstName, fullName);
@@ -467,8 +478,8 @@ public class RentalApp {
 	}
 
 	// reservation confirmation method:
-	public static void reservationConfirmation(Property property, LocalDate startDate, LocalDate endDate, int numDays,
-			double fullPrice, String firstName, String fullName) {
+	public static void reservationConfirmation(ArrayList<Property> allRentals, Property property, LocalDate startDate,
+			LocalDate endDate, int numDays, double fullPrice, String firstName, String fullName) {
 
 		// Thank user for booking with us:
 		System.out.println("Thanks for booking with us, " + firstName + "!\nYour reservation has been confirmed.");
@@ -481,18 +492,86 @@ public class RentalApp {
 		System.out.println("Duration of rental: " + numDays + "days.\n");
 		System.out.println("Rental dates: " + startDate + " - " + endDate + "\n");
 
+		// created instance and plugged in user's info (instance variables) into
+		// constructor
+		Reservation reservation = new Reservation(fullName, startDate, endDate, fullPrice, property.getName());
+		// added reservation to the file. This allows us to save user data
+		ReservationsTextUtil.appendToFile(reservation, "reservations.txt");
+
+		// Updates date available on file
+		property.setDateAvailable(endDate);
+		PropertiesTextUtil.writeToFile(allRentals, "properties.txt");
 	}
-	
-	public static void checkOut(ArrayList<Property> allRentals, Reservation reservation, String file) {
-		for (Property property: allRentals) {
+
+	public static void findReservation(Scanner scnr, ArrayList<Property> allRentals, String firstName,
+			String fullName) {
+		Reservation userReservation = null;
+		String newReservation;
+		int userChoice;
+
+		ArrayList<Reservation> allReservations = ReservationsTextUtil.readFromFile("reservations.txt");
+		// if name matches, we can let part know that we've found their reservation
+		for (Reservation reservation : allReservations) {
+			if (reservation.getFullName().matches(fullName)) {
+				System.out.println("We found your reservation.");
+				userReservation = reservation;
+				break;
+			}
+		}
+		if (userReservation == null) {
+			System.out.println("Sorry, we couldn't find a reservation with that name.");
+			newReservation = Validator.getStringMatchingRegex(scnr, "Would you like to book a new reservation? (y/n)",
+					"y|n|no|yes", false);
+			if (newReservation.toLowerCase().startsWith("y")) {
+				pickDates(scnr, allRentals, firstName, fullName);
+			}
+		} else {
+			userChoice = Validator.getInt(scnr, firstName + ", what would you like to do with this reservation?", 1, 4);
+			viewReservationMenu();
+
+			switch (userChoice) {
+			case 1:
+				System.out.println("Here are your reservation details: ");
+				System.out.println("Name: " + userReservation.getFullName());
+				System.out.println("Check-In: " + userReservation.getCheckIn());
+				System.out.println("Check-Out: " + userReservation.getCheckOut());
+				System.out.println("Total Price: " + userReservation.getPrice());
+				System.out.println("Property: " + userReservation.getPropertyName());
+				break;
+			case 2:
+				checkOut(allRentals, userReservation, allReservations);
+				break;
+			case 3:
+				break;
+			default:
+				break;
+
+			}
+		}
+
+	}
+
+	private static void viewReservationMenu() {
+		System.out.println("1. View reservation details");
+		System.out.println("2. Checkout of rental");
+		System.out.println("3. Exit");
+
+	}
+
+	public static void checkOut(ArrayList<Property> allRentals, Reservation reservation,
+			ArrayList<Reservation> allReservations) {
+		for (Property property : allRentals) {
 			if (property.getName().matches(reservation.getPropertyName())) {
 				property.setDateAvailable(LocalDate.now());
 			}
 		}
 		System.out.println("Thank you for booking your experience with us! Your checkOut has been confimed. Goodbye!");
-		
-	
-		PropertiesTextUtil.writeToFile(allRentals, file);
+
+		PropertiesTextUtil.writeToFile(allRentals, "properties.txt");
+
+		allReservations.remove(reservation);
+		ReservationsTextUtil.writeToFile(allReservations, "reservations.txt");
+
 	}
 
 }
