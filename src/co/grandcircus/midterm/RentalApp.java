@@ -465,7 +465,7 @@ public class RentalApp {
 
 		System.out.println(theProperty.getFullDetails());
 
-		System.out.printf("%-40s %-40s\n", "Check-in Date: " + startDate, "Check-out Date: " + endDate);
+		System.out.printf("%-40s %-40s\n", "Check-in Date: " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")), "Check-out Date: " + endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 
 		System.out.println("The price summary is as follows: ");
 
@@ -499,7 +499,7 @@ public class RentalApp {
 		System.out.println("Property: " + property.getName() + "\n");
 		System.out.println("Location: " + property.getLocation() + "\n");
 		System.out.println("Duration of rental: " + numDays + "days.\n");
-		System.out.println("Rental dates: " + startDate + " - " + endDate + "\n");
+		System.out.println("Rental dates: " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + " - " + endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "\n");
 
 		// created instance and plugged in user's info (instance variables) into
 		// constructor
