@@ -36,10 +36,10 @@ public class RentalApp {
 
 		String firstName = name[0];
 
-		System.out.println("1. Book New a Reservation");
-		System.out.println("2. View Existing Reservation\n");
+		System.out.println("\n1. Book New a Reservation");
+		System.out.println("2. View Existing Reservation");
 		int firstChoice = Validator.getInt(scnr,
-				"\nThanks, " + firstName + "!\nPlease let me know what you'd like to do today:\n", 1, 2);
+				"\nThanks, " + firstName + "! Please choose an option from the list above: \n", 1, 2);
 
 		switch (firstChoice) {
 		case 1:
@@ -60,7 +60,7 @@ public class RentalApp {
 		LocalDate endDate;
 
 		startDate = Validator.getLocalDate(scnr,
-				"Let me know when you are you looking to book your experience with us (MM/DD/YYYY): \n");
+				"\nLet me know when you are you looking to book your experience with us (MM/DD/YYYY): \n");
 
 		int numDays = Validator.getInt(scnr, "\nHow many nights would you like to stay? \n");
 
@@ -80,44 +80,45 @@ public class RentalApp {
 
 	public static void viewMainMenu(Scanner scnr, ArrayList<Property> allRentals, LocalDate startDate,
 			LocalDate endDate, String firstName, String fullName) {
-		String cont;
-		boolean resume;
+		// String cont;
+		// boolean resume;
+		//
+		// do {
+		// resume = true;
 
-		do {
-			resume = true;
+		System.out.println("\n1. View Available Properties");
+		System.out.println("2. View All Properties");
+		System.out.println("3. Search Properties by Location");
+		System.out.println("4. Search Properties by Rental Type");
+		System.out.println("5. Depart\n");
 
-			System.out.println("\n1. View Available Properties");
-			System.out.println("2. View All Properties");
-			System.out.println("3. Search Properties by Location");
-			System.out.println("4. Search Properties by Rental Type");
-			System.out.println("5. Depart\n");
+		int userChoice = Validator.getInt(scnr, "Please choose an option from the list above: ", 1, 5);
 
-			int userChoice = Validator.getInt(scnr, "Please choose an option from the list above: ", 1, 5);
-
-			if (userChoice == 1) {
-				// need to create method for displaying properties
-				viewProperties(scnr, allRentals, startDate, endDate, false, firstName, fullName);
-				// System.out.println("Would you like to choose another option");
-			} else if (userChoice == 2) {
-				viewProperties(scnr, allRentals, startDate, endDate, true, firstName, fullName);
-			} else if (userChoice == 3) {
-				// need to create method for searching by properties
-				searchByLocation(scnr, allRentals, startDate, endDate, firstName, fullName);
-			} else if (userChoice == 4) {
-				searchByPropertyType(scnr, allRentals, startDate, endDate, firstName, fullName);
-			} else {
-				System.out.println("\nSorry to see you go. Thanks for stopping by!");
-				resume = false;
-				break;
-			}
-			cont = Validator.getStringMatchingRegex(scnr, "\nWould you like to choose another option? (y/n): ",
-					"Y|yes|N|no", false);
-			if (cont.toLowerCase().startsWith("y")) {
-				resume = true;
-			} else {
-				resume = false;
-			}
-		} while (resume);
+		if (userChoice == 1) {
+			// need to create method for displaying properties
+			viewProperties(scnr, allRentals, startDate, endDate, false, firstName, fullName);
+			// System.out.println("Would you like to choose another option");
+		} else if (userChoice == 2) {
+			viewProperties(scnr, allRentals, startDate, endDate, true, firstName, fullName);
+		} else if (userChoice == 3) {
+			// need to create method for searching by properties
+			searchByLocation(scnr, allRentals, startDate, endDate, firstName, fullName);
+		} else if (userChoice == 4) {
+			searchByPropertyType(scnr, allRentals, startDate, endDate, firstName, fullName);
+		} else {
+			System.out.println("\nSorry to see you go. Thanks for stopping by!");
+			// resume = false;
+			// break;
+		}
+		// cont = Validator.getStringMatchingRegex(scnr, "\nWould you like to choose
+		// another option? (y/n): ",
+		// "Y|yes|N|no", false);
+		// if (cont.toLowerCase().startsWith("y")) {
+		// resume = true;
+		// } else {
+		// resume = false;
+		// }
+		// } while (resume);
 	}
 
 	public static void viewProperties(Scanner scnr, ArrayList<Property> allRentals, LocalDate startDate,
@@ -277,7 +278,9 @@ public class RentalApp {
 					System.out.println("Wonderful! We are happy we could meet your needs today.");
 					propertyPick = Validator.getInt(scnr, "\nWhich " + propertyType + " would you like to reserve?", 1,
 							count - 1);
+					searchHere = false;
 					reserveProperty(scnr, allRentals, byType, propertyPick, startDate, endDate, firstName, fullName);
+
 				}
 
 				else {
@@ -401,6 +404,7 @@ public class RentalApp {
 							1, count - 1);
 					reserveProperty(scnr, allRentals, byLocation, propertyPick, startDate, endDate, firstName,
 							fullName);
+					searchHere = false;
 				}
 
 				else {
@@ -412,8 +416,9 @@ public class RentalApp {
 					if (resumeSearch.toLowerCase().startsWith("y")) {
 						continue;
 					} else {
-						viewMainMenu(scnr, allRentals, startDate, endDate, firstName, fullName);
 						searchHere = false;
+						viewMainMenu(scnr, allRentals, startDate, endDate, firstName, fullName);
+
 					}
 				}
 			}
@@ -513,13 +518,13 @@ public class RentalApp {
 		// if name matches, we can let part know that we've found their reservation
 		for (Reservation reservation : allReservations) {
 			if (reservation.getFullName().matches(fullName)) {
-				System.out.println("We found your reservation.");
+				System.out.println("Okay, we've found your reservation.");
 				userReservation = reservation;
 				break;
 			}
 		}
 		if (userReservation == null) {
-			System.out.println("Sorry, we couldn't find a reservation with that name.");
+			System.out.println("\nSorry, we couldn't find a reservation with that name.");
 			newReservation = Validator.getStringMatchingRegex(scnr, "Would you like to book a new reservation? (y/n)",
 					"y|n|no|yes", false);
 			if (newReservation.toLowerCase().startsWith("y")) {
