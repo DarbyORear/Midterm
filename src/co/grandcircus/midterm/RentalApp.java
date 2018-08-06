@@ -11,11 +11,11 @@ import java.util.Scanner;
 public class RentalApp {
 
 	// Eddy will fix up the wording and user experience
-	// Add way to validate the dates they ente (in class tmrw)
+	// Add way to validate the dates they enter (in class tmrw)
 	// shona add reserve class
 	// eddy add input for what user would like to do at beginning
 	// Change the wording of the viewMainMenu option "would you like to choose
-	// another option" to be approproate for terminating the program
+	// another option" to be appropriate for terminating the program
 
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
