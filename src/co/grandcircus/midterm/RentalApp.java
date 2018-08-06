@@ -159,8 +159,9 @@ public class RentalApp {
 				for (Property property : allRentals) {
 					if (startDate.isBefore(property.getDateAvailable())) {
 						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(),
-								"Available starting " + property.getDateAvailable());
+								"Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 						System.out.println();
+						
 					}
 				}
 			}
@@ -251,6 +252,7 @@ public class RentalApp {
 
 				ArrayList<Property> tempArray = new ArrayList<>();
 
+				
 				for (Property property : allRentals) {
 					if (startDate.isBefore(property.getDateAvailable())) {
 						tempArray.add(property);
@@ -263,10 +265,11 @@ public class RentalApp {
 						if (property.getType().matches(propertyType)
 								&& startDate.isBefore(property.getDateAvailable())) {
 							System.out.printf(format, property.getName(), property.getLocation(),
-									"$" + property.getPrice(), "Available starting " + property.getDateAvailable());
+									"$" + property.getPrice(), "Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 							System.out.println();
 						}
-					}
+					}            
+
 				}
 
 				reserve = Validator.getStringMatchingRegex(scnr,
@@ -387,7 +390,7 @@ public class RentalApp {
 					for (Property property : allRentals) {
 						if (property.getType().matches(location) && startDate.isBefore(property.getDateAvailable())) {
 							System.out.printf(format, property.getName(), property.getLocation(),
-									"$" + property.getPrice(), "Available starting " + property.getDateAvailable());
+									"$" + property.getPrice(), "Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 							System.out.println();
 						}
 					}
@@ -539,8 +542,8 @@ public class RentalApp {
 			case 1:
 				System.out.println("Here are your reservation details: ");
 				System.out.println("Name: " + userReservation.getFullName());
-				System.out.println("Check-In: " + userReservation.getCheckIn());
-				System.out.println("Check-Out: " + userReservation.getCheckOut());
+				System.out.println("Check-In: " + userReservation.getCheckIn().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+				System.out.println("Check-Out: " + userReservation.getCheckOut().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 				System.out.println("Total Price: " + userReservation.getPrice());
 				System.out.println("Property: " + userReservation.getPropertyName());
 				break;
