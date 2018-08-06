@@ -1,6 +1,7 @@
 package co.grandcircus.midterm;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Reservation {
 
@@ -60,7 +61,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return fullName + "," + checkIn + "," + checkOut + "," + price + "," + propertyName;
+		return fullName + "," + checkIn.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "," + checkOut.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "," + price + "," + propertyName;
 	}
 	
 	

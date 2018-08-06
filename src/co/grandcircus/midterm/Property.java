@@ -1,6 +1,7 @@
 package co.grandcircus.midterm;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Property {
 	private String name;
@@ -91,7 +92,7 @@ public class Property {
 	}
 	@Override
 	public String toString() {
-		return name + "," + location + "," + type + "," + amenities + "," + price + "," + dateAvailable;
+		return name + "," + location + "," + type + "," + amenities + "," + price + "," + dateAvailable.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
 	}
 	
 	
