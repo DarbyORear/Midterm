@@ -10,3 +10,15 @@ Corktown City,Downtown,Loft,Free-Parking Wifi Kitchen TV Iron Washer Dryer Air M
 Portland Towers,Corktown,Condo,Free-Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront,115.00,08/07/2018
 Kenmore Waters,Downtown,Cottage,Free-Parking Kitchen Iron Washer Dryer Microwave Refrigerator Stove Oven Waterfront,200.00,09/01/2018
 West Village Views,West Village,Single Family,Free-Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven,150.00,08/12/2018
+Park Place,West Village,Loft,Free Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront,175.00,10/07/2018
+Ave of Fashion,Corktown,Single Family,Free Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven,100.00,09/20/2018
+Isle of Love,Downtown,Cottage,Free-Parking Garage Kitchen Iron Washer Dryer Microwave Refrigerator Stove Oven Waterfront,300.00,09/07/2018
+Woodward Springs,West Village,Single Family,Free-Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven,160.00,10/07/2018
+Beacon Park,Corktown,Loft,Free-Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront,145.00,12/24/2018
+Slow Row Parkway,Midtown,Condo,Free-Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven,130.00,11/09/2018
+Polk Ave,Midtown,Single Family,Free-Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront,85.00,01/15/2019
+Noni-town Greens,Midtown,Condo, Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront,175.00,09/07/2018
+Motor City Loft,Downtown,Loft,Free-Parking Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove OvenWaterfront,125.00,12/07/2018
+Portland Belle,Corktown,Condo, Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven Waterfront,115.00,12/07/2018
+Isle Waters,Downtown,Cottage,Free-Parking Kitchen Iron Washer Dryer Microwave Refrigerator Stove Oven Waterfront,200.00,11/01/2018
+Park Village ,West Village,Single Family,Free-Parking Garage Wifi Kitchen TV Iron Washer Dryer Air Microwave Refrigerator Stove Oven,150.00,10/12/2018
