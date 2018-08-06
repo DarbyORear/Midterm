@@ -188,8 +188,9 @@ public class Validator {
 	
 	//Not working. Unable to read in our dates from the properties.txt file
 	public static LocalDate getLocalDate(Scanner scnr, String prompt) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uuuu");
-		boolean isValid = false;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); //CHANGED uuuu TO yyyy
+		boolean isValidFormat = false;
+		boolean isValidDate = false;
 		LocalDate date = null;
 		String input;
 		do {
@@ -197,18 +198,23 @@ public class Validator {
 			input = getString(scnr, prompt);
 			// Step 2: convert it to a date
 			try {
-			
 				date = LocalDate.parse(input, formatter);
-				
-				// If exception doesn't occur, it's valid.
-				isValid = true;
+					isValidFormat = true;
+
+				if((date.isEqual(LocalDate.now()) || date.isAfter(LocalDate.now()))) {
+					isValidDate = true;
+				} else {
+					throw new IllegalArgumentException();
+
+				}
+//		
 			} catch (Exception ex) {
 				// If exception occurs, it's invalid.
-				isValid = false;
-				System.out.println("Enter a valid date in format mm/dd/yyyy.");
+//				isValidDate = false;
+				System.out.println("Sorry, that date is not valid. Please enter a valid date in format MM/DD/YYYY.");
 			}
 
-		} while (!isValid);
+		} while (!isValidFormat || !isValidDate);
 		return date;
 	}
 	
