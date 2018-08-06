@@ -133,11 +133,20 @@ public class RentalApp {
 		
 		
 		if (viewAll) {
-			System.out.println("Sorry, these properties are not available for your desired dates: ");
+			ArrayList<Property> tempArray = new ArrayList<>();
+			
 			for (Property property : allRentals) {
 				if (startDate.isBefore(property.getDateAvailable())) {
-					System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
-					System.out.println();
+					tempArray.add(property);
+				}
+			}
+			if (!tempArray.isEmpty()) {
+				System.out.println("Sorry, these properties are not available for your desired dates: ");
+				for (Property property : allRentals) {
+					if (startDate.isBefore(property.getDateAvailable())) {
+						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
+						System.out.println();
+					}
 				}
 			}
 		}
@@ -221,12 +230,22 @@ public class RentalApp {
 				}
 				
 				System.out.println();
-				System.out.println("Sorry, these " + propertyType + " properties are not available for your desired dates: ");
+				
+				ArrayList<Property> tempArray = new ArrayList<>();
+				
 				for (Property property : allRentals) {
-					if (property.getType().matches(propertyType) 
-							&& startDate.isBefore(property.getDateAvailable())) {
-						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
-						System.out.println();
+					if (startDate.isBefore(property.getDateAvailable())) {
+						tempArray.add(property);
+					}
+				}
+				if (!tempArray.isEmpty()) {
+					System.out.println("Sorry, these " + propertyType + " properties are not available for your desired dates: ");
+					for (Property property : allRentals) {
+						if (property.getType().matches(propertyType) 
+								&& startDate.isBefore(property.getDateAvailable())) {
+							System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
+							System.out.println();
+						}
 					}
 				}
 				
@@ -327,18 +346,25 @@ public class RentalApp {
 					}
 				}
 				
-				//FIX-IT: Change .equals to .matches. 
-				//Add a line between headers and list
-				//add a temp array to store the unavailable properties and only print the details below if its not empty
-				//Adding option to verify the dates selected aree the actual dates they want
 				
 				System.out.println();
-				System.out.println("Sorry, these " + location + " properties are not available for your desired dates: ");
+				
+				ArrayList<Property> tempArray = new ArrayList<>();
+				
 				for (Property property : allRentals) {
-					if (property.getType().matches(location) 
-							&& startDate.isBefore(property.getDateAvailable())) {
-						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
-						System.out.println();
+					if (startDate.isBefore(property.getDateAvailable())) {
+						tempArray.add(property);
+					}
+				}
+				
+				if (!tempArray.isEmpty()) {
+					System.out.println("Sorry, these " + location + " properties are not available for your desired dates: ");
+					for (Property property : allRentals) {
+						if (property.getType().matches(location) 
+								&& startDate.isBefore(property.getDateAvailable())) {
+							System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(), "Available starting " + property.getDateAvailable());
+							System.out.println();
+						}
 					}
 				}
 				
