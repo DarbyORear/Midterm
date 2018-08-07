@@ -231,7 +231,7 @@ public class RentalApp {
 				propertyType = null;
 			}
 
-			if (!propertyType.equals("None")) {
+			if (!propertyType.matches("None")) {
 				System.out.println("\nHere are all of our available " + propertyType + " properties: \n");
 
 				String format = "%-30s %-30s %-30s %-30s";
@@ -357,7 +357,7 @@ public class RentalApp {
 				location = null;
 			}
 
-			if (!location.equals("None")) {
+			if (!location.matches("None")) {
 				System.out.println("\nHere are all of our available " + location + " properties: \n");
 
 				String format = "%-30s %-30s %-30s %-30s";
