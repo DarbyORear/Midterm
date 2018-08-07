@@ -471,7 +471,7 @@ public class RentalApp {
 
 		// Not working
 
-		System.out.printf("%-80s\n %-80s\n %-80s\n", "Price per night: " + theProperty.getPrice(),
+		System.out.printf("%-80s\n%-80s\n%-80s\n", "Price per night: " + theProperty.getPrice(),
 				"Number of nights: " + numDays, "Total price: " + fullPrice);
 
 		confirmation = Validator.getStringMatchingRegex(scnr, "Would you like to confirm this reservation? (y/n)",

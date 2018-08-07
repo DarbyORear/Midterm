@@ -74,15 +74,15 @@ public class Property {
 	}
 
 	public String getFullDetails() {
-		String format = "%-30s %-30s\n %-30s %-30s\n";
-		String details = String.format(format, name, location, type, dateAvailable);
+		String format = "%-30s %-30s\n%-30s %-30s\n";
+		String details = String.format(format, name, location, type, "Available starting " + dateAvailable.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 		String[] allAmenities = amenities.split(" ");
 		details += "This property features ";
 		
 		for (String amenity : allAmenities) {
 			
 			if (!amenity.equals(allAmenities[allAmenities.length - 1])) {
-				details += amenity + " ";
+				details += amenity + ", ";
 			}
 			else {
 				details += "and " + amenity + ".";
