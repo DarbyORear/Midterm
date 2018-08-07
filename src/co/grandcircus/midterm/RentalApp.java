@@ -388,7 +388,7 @@ public class RentalApp {
 					System.out.println(
 							"\nSorry, these " + location + " properties are not available for your desired dates: ");
 					for (Property property : allRentals) {
-						if (property.getType().matches(location) && startDate.isBefore(property.getDateAvailable())) {
+						if (property.getLocation().matches(location) && startDate.isBefore(property.getDateAvailable())) {
 							System.out.printf(format, property.getName(), property.getLocation(),
 									"$" + property.getPrice(), "Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 							System.out.println();
