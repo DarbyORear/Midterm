@@ -10,20 +10,13 @@ import java.util.Scanner;
 
 public class RentalApp {
 
-	// Eddy will fix up the wording and user experience
-	// Add way to validate the dates they enter (in class tmrw)
-	// shona add reserve class
-	// eddy add input for what user would like to do at beginning
-	// Change the wording of the viewMainMenu option "would you like to choose
-	// another option" to be appropriate for terminating the program
-
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
 		final String Property_File = "properties.txt";
 
 		ArrayList<Property> allRentals = PropertiesTextUtil.readFromFile(Property_File);
 
-		System.out.println("Hello, and welcome to Detroit + Proper!-)\n");
+		System.out.println("Hello, and welcome to Detroit Proper =)\n");
 
 		System.out
 				.println("We're an online marketplace and hospitality service for people to rent short-term lodging.");
@@ -61,7 +54,7 @@ public class RentalApp {
 		startDate = Validator.getLocalDate(scnr,
 				"\nWhat is the assumed check-in date for your reservation? (MM/DD/YYYY)");
 
-		int numDays = Validator.getInt(scnr, "\nHow many nights are you planning to stay for? \n");
+		int numDays = Validator.getInt(scnr, "\nHow many nights are you planning to stay? \n");
 
 		endDate = startDate.plusDays(numDays);
 
@@ -419,7 +412,7 @@ public class RentalApp {
 					System.out.println(
 							"\nThat's okay! With our massive selection of properties, we're sure to find your perfect fit!");
 					resumeSearch = Validator.getStringMatchingRegex(scnr,
-							"\nWould you like to explore properties within other parts of Detroit?(y/n)", "y|yes|N|no",
+							"\nWould you like to explore properties within other parts of Detroit? (y/n)", "y|yes|N|no",
 							false);
 
 					if (resumeSearch.toLowerCase().startsWith("y")) {
