@@ -10,8 +10,9 @@ public class Property {
 	private String amenities;
 	private double price;
 	private LocalDate dateAvailable;
-	
-	public Property(String name, String location, String type, String amenities, double price, LocalDate dateAvailable) {
+
+	public Property(String name, String location, String type, String amenities, double price,
+			LocalDate dateAvailable) {
 		this.name = name;
 		this.location = location;
 		this.type = type;
@@ -19,9 +20,9 @@ public class Property {
 		this.price = price;
 		this.dateAvailable = dateAvailable;
 	}
-	
+
 	public Property() {
-		
+
 	}
 
 	public String getName() {
@@ -64,7 +65,6 @@ public class Property {
 		this.price = price;
 	}
 
-
 	public LocalDate getDateAvailable() {
 		return dateAvailable;
 	}
@@ -75,27 +75,26 @@ public class Property {
 
 	public String getFullDetails() {
 		String format = "%-30s %-30s\n%-30s %-30s\n";
-		String details = String.format(format, name, location, type, "Available starting " + dateAvailable.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		String details = String.format(format, name, location, type,
+				"Available starting " + dateAvailable.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 		String[] allAmenities = amenities.split(" ");
-		details += "This property features ";
-		
+		details += "\nThis property features ";
+
 		for (String amenity : allAmenities) {
-			
+
 			if (!amenity.equals(allAmenities[allAmenities.length - 1])) {
 				details += amenity + ", ";
-			}
-			else {
+			} else {
 				details += "and " + amenity + ".";
 			}
 		}
 		return details;
 	}
+
 	@Override
 	public String toString() {
-		return name + "," + location + "," + type + "," + amenities + "," + price + "," + dateAvailable.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
+		return name + "," + location + "," + type + "," + amenities + "," + price + ","
+				+ dateAvailable.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
 	}
-	
-	
-	
 
 }

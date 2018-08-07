@@ -23,23 +23,22 @@ public class RentalApp {
 
 		ArrayList<Property> allRentals = PropertiesTextUtil.readFromFile(Property_File);
 
-		System.out.println("Welcome to Away for the Day!\n");
+		System.out.println("Hello, and welcome to Detroit + Proper!-)\n");
 
-		System.out.println(
-				"We are a Startup based in Detroit that operates an online marketplace and hospitality service for people to rent short-term lodging.");
+		System.out
+				.println("We're an online marketplace and hospitality service for people to rent short-term lodging.");
 
 		String fullName = Validator.getStringMatchingRegex(scnr,
-				"I'd love to know who I'm working with. Please provide me with your full name (first & last):\n",
-				"^[a-z]+\\s[a-z]+$", false);
+				"\nIn order to proceed, please provide me with your first & last name:", "^[a-z]+\\s[a-z]+$", false);
 
 		String[] name = fullName.split(" ");
 
 		String firstName = name[0];
 
-		System.out.println("\n1. Book New a Reservation");
+		System.out.println("\n1. Book a New Reservation");
 		System.out.println("2. View Existing Reservation");
 		int firstChoice = Validator.getInt(scnr,
-				"\nThanks, " + firstName + "! Please choose an option from the list above: \n", 1, 2);
+				"\nThanks, " + firstName + "! Now choose an option from the list above: \n", 1, 2);
 
 		switch (firstChoice) {
 		case 1:
@@ -60,18 +59,17 @@ public class RentalApp {
 		LocalDate endDate;
 
 		startDate = Validator.getLocalDate(scnr,
-				"\nLet me know when you are you looking to book your experience with us (MM/DD/YYYY): \n");
+				"\nWhat is the assumed check-in date for your reservation? (MM/DD/YYYY)");
 
-		int numDays = Validator.getInt(scnr, "\nHow many nights would you like to stay? \n");
+		int numDays = Validator.getInt(scnr, "\nHow many nights are you planning to stay for? \n");
 
 		endDate = startDate.plusDays(numDays);
 
-		System.out.println("\nOkay, we have your planned getaway set to start on "
-				+ startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + " and end on "
+		System.out.println("\nOkay, got it! We now have your planned check-in date set for "
+				+ startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + ", and with a check-out date for "
 				+ endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "!");
-		
 
-		System.out.println("\nWe can't wait for you to see the amazing properites we have available for you.");
+		System.out.println("\nNow let's find you a cozy place to stay.");
 
 		// System.out.println("Now it's time to get this party started...\n");
 
@@ -91,7 +89,7 @@ public class RentalApp {
 		System.out.println("2. View All Properties");
 		System.out.println("3. Search Properties by Location");
 		System.out.println("4. Search Properties by Rental Type");
-		System.out.println("5. Depart\n");
+		System.out.println("5. Exit\n");
 
 		int userChoice = Validator.getInt(scnr, "Please choose an option from the list above: ", 1, 5);
 
@@ -135,6 +133,8 @@ public class RentalApp {
 		String format = "%-30s %-30s %-30s %-30s";
 		System.out.printf(format, "Property Name", "Location", "Price Per Night", "Availability");
 		System.out.println();
+		System.out.printf(format, "==============", "=========", "===============", "==============");
+		System.out.println();
 		for (Property property : allRentals) {
 			if (startDate.isAfter(property.getDateAvailable()) || startDate.isEqual(property.getDateAvailable())) {
 				System.out.printf(format, count + ". " + property.getName(), property.getLocation(),
@@ -155,27 +155,27 @@ public class RentalApp {
 				}
 			}
 			if (!tempArray.isEmpty()) {
-				System.out.println("\nSorry, these properties are not available for your desired dates: ");
+				System.out.println("*The properties below are not available for your desired dates: \n");
 				for (Property property : allRentals) {
 					if (startDate.isBefore(property.getDateAvailable())) {
 						System.out.printf(format, property.getName(), property.getLocation(), "$" + property.getPrice(),
-								"Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+								"Available starting " + property.getDateAvailable()
+										.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 						System.out.println();
-						
+
 					}
 				}
 			}
 		}
 
-		reserve = Validator.getStringMatchingRegex(scnr, "Do any of the available destinations suit your needs? (y/n)",
-				"y|yes|N|no", false);
+		reserve = Validator.getStringMatchingRegex(scnr,
+				"\nDo any of the available destinations suit your needs? (y/n)", "y|yes|N|no", false);
 
 		if (reserve.toLowerCase().startsWith("y")) {
 			// Used count - 1 because it will increment at the end of for loop, even when
 			// all items have been added already
-			propertyPick = Validator.getInt(scnr,
-					"\nWonderful! We are happy we could meet your needs today.\nWhich property would you like to reserve?",
-					1, count - 1);
+			propertyPick = Validator.getInt(scnr, "\nWonderful! Which property would you like to reserve? \n", 1,
+					count - 1);
 			reserveProperty(scnr, allRentals, byAvailability, propertyPick, startDate, endDate, firstName, fullName);
 		}
 
@@ -232,10 +232,12 @@ public class RentalApp {
 			}
 
 			if (!propertyType.matches("None")) {
-				System.out.println("\nHere are all of our available " + propertyType + " properties: \n");
+				System.out.println("\nHere are the available " + propertyType + " optons for you to choose from: \n");
 
 				String format = "%-30s %-30s %-30s %-30s";
 				System.out.printf(format, "Property Name", "Location", "Price Per Night", "Availability");
+				System.out.println();
+				System.out.printf(format, "==============", "=========", "===============", "==============");
 				System.out.println();
 				for (Property property : allRentals) {
 					if (property.getType().matches(propertyType) && (startDate.isAfter(property.getDateAvailable())
@@ -252,36 +254,35 @@ public class RentalApp {
 
 				ArrayList<Property> tempArray = new ArrayList<>();
 
-				
 				for (Property property : allRentals) {
 					if (startDate.isBefore(property.getDateAvailable())) {
 						tempArray.add(property);
 					}
 				}
 				if (!tempArray.isEmpty()) {
-					System.out.println("\nSorry, these " + propertyType
-							+ " properties are not available for your desired dates: ");
+					System.out.println("*The " + propertyType
+							+ " options listed below are not available for your desired dates: \n");
 					for (Property property : allRentals) {
 						if (property.getType().matches(propertyType)
 								&& startDate.isBefore(property.getDateAvailable())) {
 							System.out.printf(format, property.getName(), property.getLocation(),
-									"$" + property.getPrice(), "Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+									"$" + property.getPrice(), "Available starting " + property.getDateAvailable()
+											.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 							System.out.println();
 						}
-					}            
+					}
 
 				}
 
 				reserve = Validator.getStringMatchingRegex(scnr,
-						"\nDo any of these " + propertyType + " destinations suit your needs? (y/n)", "y|yes|N|no",
+						"\nDo any of the available " + propertyType + " options suit your needs? (y/n)", "y|yes|N|no",
 						false);
 
 				if (reserve.toLowerCase().startsWith("y")) {
 					// Used count - 1 because it will increment at the end of for loop, even when
 					// all items have been added already
-					System.out.println("Wonderful! We are happy we could meet your needs today.");
-					propertyPick = Validator.getInt(scnr, "\nWhich " + propertyType + " would you like to reserve?", 1,
-							count - 1);
+					propertyPick = Validator.getInt(scnr,
+							"\nWonderful! Which " + propertyType + " option would you like to reserve? ", 1, count - 1);
 					searchHere = false;
 					reserveProperty(scnr, allRentals, byType, propertyPick, startDate, endDate, firstName, fullName);
 
@@ -312,12 +313,12 @@ public class RentalApp {
 	}
 
 	public static void viewPropertyMenu() {
-		System.out.println("\nGreat! Let's explore the variety of properties we offer: ");
+		System.out.println("\nGreat! Let's explore the variety of properties we offer: \n");
 		System.out.println("1. Luxurious Lofts");
-		System.out.println("2. Chic Condo");
-		System.out.println("3. Modern Single Family");
-		System.out.println("4. Cozy Cottage");
-		System.out.println("5. Return to main menu");
+		System.out.println("2. Chic Condos");
+		System.out.println("3. Modern Single Family Houses");
+		System.out.println("4. Cozy Cottages");
+		System.out.println("5. Main Menu");
 	}
 
 	public static void searchByLocation(Scanner scnr, ArrayList<Property> allRentals, LocalDate startDate,
@@ -335,7 +336,7 @@ public class RentalApp {
 			count = 1;
 			searchHere = true;
 			viewLocationMenu();
-			int propertyChoice = Validator.getInt(scnr, "Where would you like to escape?", 1, 5);
+			int propertyChoice = Validator.getInt(scnr, "\nPlease choose an option from the list above:", 1, 5);
 
 			switch (propertyChoice) {
 			case 1:
@@ -363,6 +364,9 @@ public class RentalApp {
 				String format = "%-30s %-30s %-30s %-30s";
 				System.out.printf(format, "Property Name", "Location", "Price Per Night", "Availability");
 				System.out.println();
+				System.out.printf(format, "==============", "=========", "===============", "==============");
+				System.out.println();
+
 				for (Property property : allRentals) {
 					if (property.getLocation().matches(location) && (startDate.isAfter(property.getDateAvailable())
 							|| startDate.isEqual(property.getDateAvailable()))) {
@@ -386,26 +390,26 @@ public class RentalApp {
 
 				if (!tempArray.isEmpty()) {
 					System.out.println(
-							"\nSorry, these " + location + " properties are not available for your desired dates: ");
+							"*Any " + location + " options listed below are not available for your desired dates: \n");
 					for (Property property : allRentals) {
-						if (property.getLocation().matches(location) && startDate.isBefore(property.getDateAvailable())) {
+						if (property.getLocation().matches(location)
+								&& startDate.isBefore(property.getDateAvailable())) {
 							System.out.printf(format, property.getName(), property.getLocation(),
-									"$" + property.getPrice(), "Available starting " + property.getDateAvailable().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+									"$" + property.getPrice(), "Available starting " + property.getDateAvailable()
+											.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 							System.out.println();
 						}
 					}
 				}
 
 				reserve = Validator.getStringMatchingRegex(scnr,
-						"\nDo any of these " + location + " destinations suit your needs? (y/n)", "y|yes|N|no", false);
+						"\nDo any of these " + location + " options suit your needs? (y/n)", "y|yes|N|no", false);
 
 				if (reserve.toLowerCase().startsWith("y")) {
 					// Used count - 1 because it will increment at the end of for loop, even when
 					// all items have been added already
 					propertyPick = Validator.getInt(scnr,
-							"\nWonderful! We are happy we could meet your needs today.\nWhich " + location
-									+ " property would you like to reserve?",
-							1, count - 1);
+							"\nWonderful! Which " + location + " property would you like to reserve?", 1, count - 1);
 					reserveProperty(scnr, allRentals, byLocation, propertyPick, startDate, endDate, firstName,
 							fullName);
 					searchHere = false;
@@ -415,7 +419,8 @@ public class RentalApp {
 					System.out.println(
 							"\nThat's okay! With our massive selection of properties, we're sure to find your perfect fit!");
 					resumeSearch = Validator.getStringMatchingRegex(scnr,
-							"\nWould you like to explore properties at our other locations?(y/n)", "y|yes|N|no", false);
+							"\nWould you like to explore properties within other parts of Detroit?(y/n)", "y|yes|N|no",
+							false);
 
 					if (resumeSearch.toLowerCase().startsWith("y")) {
 						continue;
@@ -437,12 +442,12 @@ public class RentalApp {
 	}
 
 	public static void viewLocationMenu() {
-		System.out.println("Wonderful! Let's explore the variety of locations we offer: ");
+		System.out.println("\nWonderful! Let's explore the variety of locations we offer: \n");
 		System.out.println("1. Downtown");
 		System.out.println("2. Midtown");
 		System.out.println("3. West Village");
 		System.out.println("4. Corktown");
-		System.out.println("5. Return to main menu");
+		System.out.println("5. Main Menu");
 	}
 
 	public static void reserveProperty(Scanner scnr, ArrayList<Property> allRentals,
@@ -460,21 +465,23 @@ public class RentalApp {
 		fullPrice = numDays * theProperty.getPrice();
 
 		System.out.println(
-				firstName + ", you have selected " + theProperty.getName() + ". Here are the full details: \n");
+				"\n" + firstName + ", you have selected " + theProperty.getName() + ". Here are the full details: ");
 		System.out.println();
 
 		System.out.println(theProperty.getFullDetails());
 
-		System.out.printf("%-40s %-40s\n", "Check-in Date: " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")), "Check-out Date: " + endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		System.out.printf("%-31s %-31s\n",
+				"\nCheck-in Date: " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")),
+				"Check-out Date: " + endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 
-		System.out.println("The price summary is as follows: ");
+		System.out.println("\nThe price summary is as follows:\n ");
 
 		// Not working
 
 		System.out.printf("%-80s\n%-80s\n%-80s\n", "Price per night: " + theProperty.getPrice(),
 				"Number of nights: " + numDays, "Total price: " + fullPrice);
 
-		confirmation = Validator.getStringMatchingRegex(scnr, "Would you like to confirm this reservation? (y/n)",
+		confirmation = Validator.getStringMatchingRegex(scnr, "\nWould you like to confirm this reservation? (y/n)",
 				"y|yes|no|n", false);
 
 		if (confirmation.toLowerCase().startsWith("y")) {
@@ -491,15 +498,16 @@ public class RentalApp {
 			LocalDate endDate, int numDays, double fullPrice, String firstName, String fullName) {
 
 		// Thank user for booking with us:
-		System.out.println("Thanks for booking with us, " + firstName + "!\nYour reservation has been confirmed.");
-		System.out.println("Here are the details of your researvation for your records:\n");
+		System.out.println("Thanks for booking with us, " + firstName + "! Your reservation has been confirmed.");
+		System.out.println("\nHere are the details of your researvation for your records:\n");
 
 		System.out.println("Name: " + fullName + "\n");
 		System.out.println("Total Price: " + "$" + fullPrice + "\n");
 		System.out.println("Property: " + property.getName() + "\n");
 		System.out.println("Location: " + property.getLocation() + "\n");
-		System.out.println("Duration of rental: " + numDays + "days.\n");
-		System.out.println("Rental dates: " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + " - " + endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "\n");
+		System.out.println("Duration of rental: " + numDays + " days.\n");
+		System.out.println("Rental dates: " + startDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + " - "
+				+ endDate.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")) + "\n");
 
 		// created instance and plugged in user's info (instance variables) into
 		// constructor
@@ -522,28 +530,30 @@ public class RentalApp {
 		// if name matches, we can let part know that we've found their reservation
 		for (Reservation reservation : allReservations) {
 			if (reservation.getFullName().matches(fullName)) {
-				System.out.println("Okay, we've found your reservation.");
+				System.out.println("\nGot it, we've found your reservation.\n");
 				userReservation = reservation;
 				break;
 			}
 		}
 		if (userReservation == null) {
 			System.out.println("\nSorry, we couldn't find a reservation with that name.");
-			newReservation = Validator.getStringMatchingRegex(scnr, "Would you like to book a new reservation? (y/n)",
+			newReservation = Validator.getStringMatchingRegex(scnr, "\nWould you like to book a new reservation? (y/n)",
 					"y|n|no|yes", false);
 			if (newReservation.toLowerCase().startsWith("y")) {
 				pickDates(scnr, allRentals, firstName, fullName);
 			}
 		} else {
-			userChoice = Validator.getInt(scnr, firstName + ", what would you like to do with this reservation?", 1, 4);
 			viewReservationMenu();
+			userChoice = Validator.getInt(scnr, firstName + ", what would you like to do with this reservation?", 1, 4);
 
 			switch (userChoice) {
 			case 1:
-				System.out.println("Here are your reservation details: ");
+				System.out.println("\nHere are your reservation details: \n");
 				System.out.println("Name: " + userReservation.getFullName());
-				System.out.println("Check-In: " + userReservation.getCheckIn().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-				System.out.println("Check-Out: " + userReservation.getCheckOut().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+				System.out.println(
+						"Check-In: " + userReservation.getCheckIn().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+				System.out.println("Check-Out: "
+						+ userReservation.getCheckOut().format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 				System.out.println("Total Price: " + userReservation.getPrice());
 				System.out.println("Property: " + userReservation.getPropertyName());
 				break;
@@ -561,9 +571,9 @@ public class RentalApp {
 	}
 
 	private static void viewReservationMenu() {
-		System.out.println("1. View reservation details");
-		System.out.println("2. Checkout of rental");
-		System.out.println("3. Exit");
+		System.out.println("1. View Reservation Details");
+		System.out.println("2. Rental Check-Out");
+		System.out.println("3. Exit\n");
 
 	}
 
@@ -574,7 +584,7 @@ public class RentalApp {
 				property.setDateAvailable(LocalDate.now());
 			}
 		}
-		System.out.println("Thank you for booking your experience with us! Your checkOut has been confimed. Goodbye!");
+		System.out.println("\nYour check-out has been confimed. Thank you for booking your experience with us!");
 
 		PropertiesTextUtil.writeToFile(allRentals, "properties.txt");
 

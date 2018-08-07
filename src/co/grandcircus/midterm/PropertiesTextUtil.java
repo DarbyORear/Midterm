@@ -34,10 +34,10 @@ public class PropertiesTextUtil {
 
 			// Catches exception if file is not found
 		} catch (FileNotFoundException ex) {
-			System.out.println("Sorry, file does not exist");
+			System.out.println("\nSorry, file does not exist");
 			// Catches any other exceptions
 		} catch (IOException ex) {
-			System.out.println("Sorry, there was an error.");
+			System.out.println("\nSorry, there was an error.");
 			ex.printStackTrace();
 		}
 
@@ -98,11 +98,11 @@ public class PropertiesTextUtil {
 			}
 			// Catches exception thrown when file is not found
 		} catch (FileNotFoundException ex) {
-			System.out.println("Sorry, the output file does not exist.");
+			System.out.println("\nSorry, the output file does not exist.");
 
 			// Catches all other exceptions
 		} catch (IOException ex) {
-			System.out.println("Sorry, something unexpected occurred.");
+			System.out.println("\nSorry, something unexpected occurred.");
 			ex.printStackTrace();
 		}
 	}
@@ -117,9 +117,9 @@ public class PropertiesTextUtil {
 				PrintWriter output = new PrintWriter(outFile);) {
 			output.println(convertPropertyToLine(property));
 		} catch (FileNotFoundException ex) {
-			System.out.println("Sorry, the output file does not exist.");
+			System.out.println("\nSorry, the output file does not exist.");
 		} catch (IOException ex) {
-			System.out.println("Sorry, something unexpected occurred.");
+			System.out.println("\nSorry, something unexpected occurred.");
 			ex.printStackTrace();
 		}
 	}

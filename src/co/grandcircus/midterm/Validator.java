@@ -2,13 +2,13 @@ package co.grandcircus.midterm;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Validator {
 
@@ -23,7 +23,7 @@ public class Validator {
 			scnr.nextLine();
 			return num;
 		} catch (InputMismatchException e) {
-			System.out.println("Enter a whole number, using digits.");
+			System.out.println("\nEnter a whole number, using digits.");
 			scnr.nextLine();
 			return getInt(scnr, prompt);
 		}
@@ -40,7 +40,7 @@ public class Validator {
 			isValid = scnr.hasNextDouble();
 			if (!isValid) {
 				scnr.nextLine();
-				System.out.println("Enter a number, in digits.");
+				System.out.println("\nEnter a number, in digits.");
 			}
 		} while (!isValid);
 
@@ -69,10 +69,10 @@ public class Validator {
 
 			if (number < min) {
 				isValid = false;
-				System.out.println("The number must be at least " + min);
+				System.out.println("\nThe number must be at least " + min);
 			} else if (number > max) {
 				isValid = false;
-				System.out.println("The number must not be larger than " + max);
+				System.out.println("\nThe number must not be larger than " + max);
 			} else {
 				isValid = true;
 			}
@@ -92,10 +92,10 @@ public class Validator {
 
 			if (number < min) {
 				isValid = false;
-				System.out.println("The number must be at least " + min);
+				System.out.println("\nThe number must be at least " + min);
 			} else if (number > max) {
 				isValid = false;
-				System.out.println("The number must not be larger than " + max);
+				System.out.println("\nThe number must not be larger than " + max);
 			} else {
 				isValid = true;
 			}
@@ -116,7 +116,7 @@ public class Validator {
 			if (input.matches(regex)) {
 				isValid = true;
 			} else {
-				System.out.println("Input must match the appropriate format.");
+				System.out.println("\nInput must match the appropriate format.");
 				isValid = false;
 			}
 
@@ -149,7 +149,7 @@ public class Validator {
 			if (match.matches()) {
 				isValid = true;
 			} else {
-				System.out.println("Invalid Entry. Please try again.");
+				System.out.println("\nInvalid Entry. Please try again.");
 				isValid = false;
 			}
 
@@ -179,16 +179,16 @@ public class Validator {
 			} catch (ParseException ex) {
 				// If exception occurs, it's invalid.
 				isValid = false;
-				System.out.println("Enter a valid date in format mm/dd/yyyy.");
+				System.out.println("\nEnter a valid date in format mm/dd/yyyy.");
 			}
 
 		} while (!isValid);
 		return date;
 	}
-	
-	//Not working. Unable to read in our dates from the properties.txt file
+
+	// Not working. Unable to read in our dates from the properties.txt file
 	public static LocalDate getLocalDate(Scanner scnr, String prompt) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); //CHANGED uuuu TO yyyy
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); // CHANGED uuuu TO yyyy
 		boolean isValidFormat = false;
 		boolean isValidDate = false;
 		LocalDate date = null;
@@ -199,25 +199,25 @@ public class Validator {
 			// Step 2: convert it to a date
 			try {
 				date = LocalDate.parse(input, formatter);
-					isValidFormat = true;
+				isValidFormat = true;
 
-				if((date.isEqual(LocalDate.now()) || date.isAfter(LocalDate.now()))) {
+				if ((date.isEqual(LocalDate.now()) || date.isAfter(LocalDate.now()))) {
 					isValidDate = true;
 				} else {
 					throw new IllegalArgumentException();
 
 				}
-//		
+				//
 			} catch (Exception ex) {
 				// If exception occurs, it's invalid.
-//				isValidDate = false;
-				System.out.println("Sorry, that date is not valid. Please enter a valid date in format MM/DD/YYYY.");
+				// isValidDate = false;
+				System.out.println("\nSorry, that date is not valid. Please enter a valid date in format MM/DD/YYYY.");
 			}
 
 		} while (!isValidFormat || !isValidDate);
 		return date;
 	}
-	
+
 	public static boolean getBoolean(Scanner scnr, String prompt) {
 		String response = getStringMatchingRegex(scnr, prompt, "false|true", false).toLowerCase();
 		return Boolean.parseBoolean(response);
