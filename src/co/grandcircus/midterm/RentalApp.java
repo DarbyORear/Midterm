@@ -499,7 +499,7 @@ public class RentalApp {
 
 		// Thank user for booking with us:
 		System.out.println("Thanks for booking with us, " + firstName + "! Your reservation has been confirmed.");
-		System.out.println("\nHere are the details of your researvation for your records:\n");
+		System.out.println("\nHere are the details of your reservation for your records:\n");
 
 		System.out.println("Name: " + fullName + "\n");
 		System.out.println("Total Price: " + "$" + fullPrice + "\n");
@@ -561,6 +561,7 @@ public class RentalApp {
 				checkOut(allRentals, userReservation, allReservations);
 				break;
 			case 3:
+				System.out.println("\nThank you for booking your experience with us!");
 				break;
 			default:
 				break;
